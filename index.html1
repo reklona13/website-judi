@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo Game Koin</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:linear-gradient(135deg,#101827,#172554);
+  color:white;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.card{
+  width:92%;
+  max-width:420px;
+  background:#1e293b;
+  border-radius:22px;
+  padding:25px;
+  text-align:center;
+  box-shadow:0 15px 40px #0008;
+}
+h1{margin-top:0}
+.coin{
+  font-size:80px;
+  margin:20px;
+}
+.balance{
+  background:#0f172a;
+  padding:15px;
+  border-radius:14px;
+  margin-bottom:20px;
+}
+button{
+  width:100%;
+  padding:15px;
+  margin:8px 0;
+  border:0;
+  border-radius:12px;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
+}
+#play{background:#22c55e;color:white}
+#reset{background:#475569;color:white}
+#result{
+  min-height:28px;
+  margin:15px 0;
+  font-weight:bold;
+}
+.small{
+  color:#94a3b8;
+  font-size:13px;
+  margin-top:18px;
+}
+</style>
+</head>
+
+<body>
+<div class="card">
+  <h1>🪙 Demo Game Koin</h1>
+
+  <div class="balance">
+    Saldo Demo<br>
+    <strong id="balance">1000</strong> koin
+  </div>
+
+  <div class="coin" id="coin">🪙</div>
+
+  <div id="result">Tekan tombol untuk bermain</div>
+
+  <button id="play" onclick="playGame()">MAIN DEMO</button>
+  <button id="reset" onclick="resetGame()">RESET SALDO</button>
+
+  <div class="small">
+    Ini hanya permainan demo menggunakan koin virtual.
+    Tidak menggunakan uang asli dan tidak menyediakan taruhan.
+  </div>
+</div>
+
+<script>
+let balance = 1000;
+
+function playGame(){
+  if(balance < 10){
+    document.getElementById("result").textContent =
+      "Saldo demo tidak cukup.";
+    return;
+  }
+
+  balance -= 10;
+
+  const hasil = Math.random() < 0.5 ? "🪙" : "💎";
+  document.getElementById("coin").textContent = hasil;
+
+  if(hasil === "💎"){
+    balance += 20;
+    document.getElementById("result").textContent =
+      "🎉 Menang demo! +20 koin";
+  }else{
+    document.getElementById("result").textContent =
+      "😄 Coba lagi! -10 koin";
+  }
+
+  document.getElementById("balance").textContent = balance;
+}
+
+function resetGame(){
+  balance = 1000;
+  document.getElementById("balance").textContent = balance;
+  document.getElementById("coin").textContent = "🪙";
+  document.getElementById("result").textContent =
+    "Saldo demo dikembalikan ke 1000 koin.";
+}
+</script>
+
+</body>
+</html>
